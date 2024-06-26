@@ -1,11 +1,13 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const { Circle, Triangle, Square } = require("./lib/shapes.js");
 
 const questions = [
   {
     type: "input",
     name: "text",
     message: "Choose up to three characters:",
+    validate: (input) => input.length <= 3 || "Enter up to 3 characters.",
   },
   {
     type: "list",
@@ -44,5 +46,3 @@ const questions = [
     ],
   },
 ];
-
-console.log(questions);
