@@ -12,37 +12,49 @@ const questions = [
   {
     type: "list",
     name: "textColor",
-    message: "Choose the text's color:",
-    choices: [
-      "red",
-      "green",
-      "yellow",
-      "blue",
-      "magenta",
-      "black",
-      "white",
-      "cyan",
-    ],
+    message: "Choose the text's color via keyword or hexadecimal:",
   },
   {
     type: "list",
     name: "shapes",
-    message: "Choose shapes to use:",
+    message: "Choose a shape to use:",
     choices: ["square", "triangle", "circle"],
   },
   {
-    type: "list",
+    type: "input",
     name: "shapesColor",
-    message: "Choose the shape's color:",
-    choices: [
-      "red",
-      "green",
-      "yellow",
-      "blue",
-      "magenta",
-      "black",
-      "white",
-      "cyan",
-    ],
+    message: "Choose the shape's color via keyowrd or hexadecimal:",
   },
 ];
+
+inquirer.prompt(questions).then((answers) => {
+  const { text, textColor, shape, shapeColor } = answers;
+  let shapeInstance;
+
+  switch (shape) {
+    case "circle":
+      shapeInstance = new Circle(shapeColor);
+      break;
+    case "triangle":
+      shapeInstance = new Triangle(shapeColor);
+      break;
+    case "square":
+      shapeInstance = new Square(shapeColor);
+      break;
+  }
+
+  const svgContent = `
+    <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+      ${shapeInstance.render()}
+      <text x="150" y="125" font-size="40" text-anchor="middle" fill="${textColor}">${text}</text>
+    </svg>
+  `;
+
+  fs.writeFile("logo.svg", svgContent.trim(), (err) => {
+    if (err) {
+      console.error("Error writing file:", err);
+    } else {
+      console.log("Generated logo.svg");
+    }
+  });
+});
