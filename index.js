@@ -6,7 +6,7 @@ const questions = [
   {
     type: "input",
     name: "text",
-    message: "Choose up to three characters:",
+    message: "Enter text (up to three characters):",
     validate: (input) => input.length <= 3 || "Enter up to 3 characters.",
   },
   {
