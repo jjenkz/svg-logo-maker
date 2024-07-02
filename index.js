@@ -10,7 +10,7 @@ const questions = [
     validate: (input) => input.length <= 3 || "Enter up to 3 characters.",
   },
   {
-    type: "list",
+    type: "input",
     name: "textColor",
     message: "Choose the text's color via keyword or hexadecimal:",
   },
