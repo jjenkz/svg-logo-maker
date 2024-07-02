@@ -1,5 +1,5 @@
-const inquirer = require("inquirer");
 const fs = require("fs");
+const inquirer = require("inquirer");
 const { Circle, Triangle, Square } = require("./lib/shapes");
 
 const questions = [
@@ -23,23 +23,23 @@ const questions = [
   {
     type: "input",
     name: "shapesColor",
-    message: "Choose the shape's color via keyowrd or hexadecimal:",
+    message: "Choose the shape's color via keyword or hexadecimal:",
   },
 ];
 
 inquirer.prompt(questions).then((answers) => {
-  const { text, textColor, shape, shapeColor } = answers;
+  const { text, textColor, shapes, shapesColor } = answers;
   let shapeInstance;
 
-  switch (shape) {
+  switch (shapes) {
     case "circle":
-      shapeInstance = new Circle(shapeColor);
+      shapeInstance = new Circle(shapesColor);
       break;
     case "triangle":
-      shapeInstance = new Triangle(shapeColor);
+      shapeInstance = new Triangle(shapesColor);
       break;
     case "square":
-      shapeInstance = new Square(shapeColor);
+      shapeInstance = new Square(shapesColor);
       break;
   }
 
